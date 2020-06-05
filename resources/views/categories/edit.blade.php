@@ -1,0 +1,92 @@
+@extends('layouts.layout')
+@section('title','Editar categorias')
+@section('content')
+    <div class="container">
+    	<div class="row">
+    		<div class="col-md-3">
+    			<div class="card shadow bg-light">
+    			  <div class="card-body">
+    			  	<h5 class="text-center font-weight-normal">Editar categoria</h5>
+    			    {!! Form::open(['route' => ['category.update',$category->id],'method' => 'PUT']) !!}
+							<label for="name">Nombre:</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1"><i class="fas fa-font"></i></span>
+								</div>
+								<input id="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $category->name) }}" required autocomplete="name">
+								@error('name')
+								<span class="invalid-feedback" role="alert">
+									<strong>{{ $message }}</strong>
+								</span>
+								@enderror
+							</div>
+							<label for="module">Modulo:</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1">
+										<i class="fas fa-mouse-pointer"></i>
+									</span>
+								</div>
+								{!! Form::select('module', getModulesArray(), $category->module, ['class' => 'custom-select']) !!}
+							</div>
+							<label for="icono">Icono:</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1"><i class="far fa-sun"></i></i></span>
+								</div>
+								<input id="icono" class="form-control @error('icono') is-invalid @enderror" name="icono" value="{{ old('icono',$category->icono) }}" required autocomplete="icono">
+								@error('icono')
+								<span class="invalid-feedback" role="alert">
+									<strong>{{ $message }}</strong>
+								</span>
+								@enderror
+							</div>
+							<div class="py-2">
+							<button class="btn btn-primary btn-lg btn-block"><i class="far fa-save"></i> Editar</button>
+							</div>    			    	
+    			    {!! Form::close() !!}
+    			  </div>
+    			</div>
+    		</div>
+			<div class="col-md-9">
+				<div class="card shadow bg-light">
+					<div class="card-body">
+						<div class="container">	
+							<nav class="nav nav-pills nav-fill">
+								@foreach(getModulesArray() as $m => $k)
+								<a class="nav-link btn btn-outline-primary mr-2 mt-1 mb-1" href="{{ url('/categories/'.$m) }}">{{ $k }}</a>
+								@endforeach
+							</nav>
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<td width="32px"></td>
+										<td>Nombre</td>
+										<td></td>
+									</tr>
+								</thead>
+								<tbody>
+									@foreach($cats as $cat)
+									<tr>
+										<td>{!! htmlspecialchars_decode($cat->icono) !!}</td>
+										<td>{{ $cat->name }}</td>
+										<td width="10px">
+											<a href="{{ route('category.edit', $cat->id) }}" class="btn btn-warning btn-sm">Editar</a>
+										</td>
+										<td >
+											 {!! Form::open(['route' => ['category.destroy', $cat->id],
+		           							'method'=> 'DELETE']) !!}
+		           							<button class="btn btn-sm btn-danger">Eliminar</button>
+		           							{!! Form::close() !!}
+										</td>
+									</tr>
+									@endforeach
+								</tbody>
+							</table>
+						</div>				    
+					</div>
+				</div>
+			</div>
+    	</div>
+    </div>
+@endsection
