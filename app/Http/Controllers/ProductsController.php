@@ -20,7 +20,7 @@ class ProductsController extends Controller
     public function getHome()
     {
     	// $products = Product::orderBy('id', 'Desc')->get();
-        $products = Product::with(['category'])->orderBy('id','Desc')->paginate(5);
+        $products = Product::with(['category'])->orderBy('id','Desc')->paginate(4);
     	return view('products.home', compact('products'));
     }
     public function getCreate()
@@ -125,5 +125,13 @@ class ProductsController extends Controller
         $product->delete();
         Alert::success('Exito', 'Producto Elimiando con exito');
         return redirect()->route('products.home')->with('status', '¡ El producto fue eliminado satisfatoriamente pero puede recuperarlo en cualquier momento si lo desea !');
+    }
+
+    public function getSearch(Request $request)
+    {
+        $products = Product::whereHas('category', function ($query) use ($request) {    
+        $query->where('name', 'like', "%{$request->search_cat}%");
+        })->name($request->search)->orderBy('id', 'DESC')->paginate(4);
+        return view('products.home', compact('products')); 
     }
 }

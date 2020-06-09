@@ -7,11 +7,12 @@ Route::get('/', function () {
 })->name('welcome');
 
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home')->middleware('user_status');
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/products', 'ProductsController@getHome')->name('products.home');
 Route::post('/products', 'ProductsController@postStore')->name('products.store');
-Route::get('/products-create', 'ProductsController@getCreate')->name('products.create');
+Route::get('/products/create', 'ProductsController@getCreate')->name('products.create');
+Route::get('/products/search', 'ProductsController@getSearch')->name('products.search');
 Route::get('/products/edit/{product}','ProductsController@getEdit')->name('products.edit');
 Route::put('/products/edit/{product}','ProductsController@putUpdate')->name('products.update');
 Route::delete('/products/{product}','ProductsController@productDestroy')->name('products.destroy');
@@ -27,4 +28,4 @@ Route::get('/users/{status}', 'UserController@getHome')->name('users.home');
 Route::get('/users/show/{user}', 'UserController@getShow')->name('users.show');
 Route::get('/users/banned/{user}', 'UserController@getBanned')->name('users.banned');
 
-Route::get('/users/banned/help', 'UserController@getBanned')->name('help');
+Route::get('/help', 'HelpController@getHelp')->name('help')->middleware('isadmin');

@@ -52,17 +52,25 @@
 				<div class="card shadow bg-light">
 					<div class="card-body">
 						<div class="container">	
-							<nav class="nav nav-pills nav-fill">
-								@foreach(getModulesArray() as $m => $k)
-								<a class="nav-link btn btn-outline-primary mr-2 mt-1 mb-1" href="{{ url('/categories/'.$m) }}">{{ $k }}</a>
-								@endforeach
-							</nav>
+							<div class="d-flex align-content-center justify-content-between">
+								<div>
+									<h1 class="text-primary">Categorias</h1>
+								</div>
+								<div>
+								<nav class="nav nav-pills nav-fill mb-2">
+									@foreach(getModulesArray() as $m => $k)
+									<a class="nav-link btn btn-outline-primary mr-2 mt-1 mb-1" href="{{ url('/categories/'.$m) }}">{{ $k }}</a>
+									@endforeach
+								</nav>
+								</div>
+							</div>
 							<table class="table table-hover">
-								<thead>
+								<thead class="thead-dark">
 									<tr>
-										<td width="32px"></td>
-										<td>Nombre</td>
-										<td></td>
+										<th scope="col">Icono</th>
+										<th scope="col">Nombre</th>
+										<th scope="col">Acción</th>
+										<th scope="col"></th>
 									</tr>
 								</thead>
 								<tbody>

@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Middleware;
-
 use Closure;
 
 class IsAdmin
@@ -19,7 +18,7 @@ class IsAdmin
         {
             return $next($request);    
         }else{
-            return redirect('/');
+            return redirect()->route('home')->with('status', '¡ No tienes permiso para ingresar aquí lo siento !');
         }
     }
 }

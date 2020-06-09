@@ -20,7 +20,7 @@ class UserStatus
             return $next($request);
         }else{
             // return redirect()->route('logout');
-            return redirect('/')->with('status', '¡ su usuario ah sido baneado !');
+            return redirect()->route('home')->with('status', '¡ su usuario ah sido baneado !');
         }
         
     }

@@ -3,16 +3,39 @@
 @section('content')
 <div class="container">
 	<div class="row">
+		<div class="col-12">
+			<h1 class="text-primary text-center display-6">Productos disponibles</h1>
+		</div>
+	</div>
+	<div class="row">
 		<div class="col-md-12">
 			<div class="card shadow bg-light">
 			  <div class="card-body">
-			  	<div class="d-flex justify-content-between align-items-center mb-2">
-			  		<div>
-			  			<h1 class="text-primary text-center">Productos</h1>		
-			  		</div>
-			  		<div>
-			  			<a href="{{ route('products.create') }}" class="btn btn-outline-primary"><i class="fas fa-plus"></i> Agregar producto</a href="{{ route('products.create') }}">
-			  		</div>
+			  	<div class="row">
+			  		<div class="col-12">
+				  		<div class="col-3 float-left mb-3">
+				  			<a href="{{ route('products.create') }}" class="btn btn-outline-primary"><i class="fas fa-plus"></i> Agregar producto</a>
+				  		</div>
+				  		{!! Form::open(['route' => 'products.search', 'method' => 'GET']) !!}	
+							<div class="col-3 float-right mb-3">
+								<div class="input-group">
+									<div class="input-group-prepend">
+										<span class="input-group-text" id="basic-addon1"><i class="fas fa-search-plus"></i></i></span>
+									</div>
+									<input id="search_cat" placeholder="Categoria del producto" class="form-control" name="search_cat">
+								</div>
+							</div>				  				  		
+					  		<div class="col-3 float-right mb-3">
+						  		<div class="input-group">
+						  			<div class="input-group-prepend">
+						  				<span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
+						  			</div>
+						  			<input id="search" placeholder="Nombre del producto" class="form-control" name="search">
+							  	</div>
+							</div>
+							<button hidden=""></button>
+						{!! Form::close() !!}
+					</div>							  	
 			  	</div>
 			  	
 			  	<table class="table table-hover">
