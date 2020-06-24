@@ -21,7 +21,7 @@
 		<main class="py-4">
 			@yield('content')
 		</main>
-		<footer class="bg-white text-center text-black-50 py-3 shadow">
+		<footer class="bg-light text-center text-black-50 py-3 shadow">
 			{{ config('app.name') }} | Copyright @ 2020
 		</footer>
 	</div>

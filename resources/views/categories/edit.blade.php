@@ -7,7 +7,8 @@
     			<div class="card shadow bg-light">
     			  <div class="card-body">
     			  	<h5 class="text-center font-weight-normal">Editar categoria</h5>
-    			    {!! Form::open(['route' => ['category.update',$category->id],'method' => 'PUT']) !!}
+    			  	@if(kvfj(auth()->user()->permissions, 'category_edit'))
+    			    {!! Form::open(['route' => ['category_edit',$category->id],'method' => 'PUT']) !!}
 							<label for="name">Nombre:</label>
 							<div class="input-group">
 								<div class="input-group-prepend">
@@ -34,7 +35,7 @@
 								<div class="input-group-prepend">
 									<span class="input-group-text" id="basic-addon1"><i class="far fa-sun"></i></i></span>
 								</div>
-								<input id="icono" class="form-control @error('icono') is-invalid @enderror" name="icono" value="{{ old('icono',$category->icono) }}" required autocomplete="icono">
+								<input id="icono" class="form-control @error('icono') is-invalid @enderror" name="icono" value="{{ old('icono', $category->icono) }}" required autocomplete="icono">
 								@error('icono')
 								<span class="invalid-feedback" role="alert">
 									<strong>{{ $message }}</strong>
@@ -45,6 +46,7 @@
 							<button class="btn btn-primary btn-lg btn-block"><i class="far fa-save"></i> Editar</button>
 							</div>    			    	
     			    {!! Form::close() !!}
+    			    @endif
     			  </div>
     			</div>
     		</div>
@@ -79,13 +81,17 @@
 										<td>{!! htmlspecialchars_decode($cat->icono) !!}</td>
 										<td>{{ $cat->name }}</td>
 										<td width="10px">
-											<a href="{{ route('category.edit', $cat->id) }}" class="btn btn-warning btn-sm">Editar</a>
+											@if(kvfj(auth()->user()->permissions, 'category_edit'))
+											<a href="{{ route('category_edit', $cat->id) }}" class="btn btn-warning btn-sm">Editar</a>
+											@endif
 										</td>
 										<td >
-											 {!! Form::open(['route' => ['category.destroy', $cat->id],
+											@if(kvfj(auth()->user()->permissions, 'category_destroy'))
+											 {!! Form::open(['route' => ['category_destroy', $cat->id],
 		           							'method'=> 'DELETE']) !!}
 		           							<button class="btn btn-sm btn-danger">Eliminar</button>
 		           							{!! Form::close() !!}
+		           							@endif
 										</td>
 									</tr>
 									@endforeach

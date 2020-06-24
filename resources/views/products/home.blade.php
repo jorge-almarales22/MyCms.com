@@ -14,9 +14,12 @@
 			  	<div class="row">
 			  		<div class="col-12">
 				  		<div class="col-3 float-left mb-3">
-				  			<a href="{{ route('products.create') }}" class="btn btn-outline-primary"><i class="fas fa-plus"></i> Agregar producto</a>
+				  			@if(kvfj(auth()->user()->permissions, 'products_create'))
+				  			<a href="{{ route('products_create') }}" class="btn btn-outline-primary"><i class="fas fa-plus"></i> Agregar producto</a>
+				  			@endif
 				  		</div>
-				  		{!! Form::open(['route' => 'products.search', 'method' => 'GET']) !!}	
+				  		@if(kvfj(auth()->user()->permissions, 'products_search'))
+				  		{!! Form::open(['route' => 'products_search', 'method' => 'GET']) !!}	
 							<div class="col-3 float-right mb-3">
 								<div class="input-group">
 									<div class="input-group-prepend">
@@ -35,6 +38,7 @@
 							</div>
 							<button hidden=""></button>
 						{!! Form::close() !!}
+						@endif
 					</div>							  	
 			  	</div>
 			  	
@@ -64,15 +68,19 @@
 			  				<td>{{ $product->name }}</td>
 			  				<td>{{ $product->category->name }}</td>
 			  				<td>{{ $product->price }}</td>
-			  				<td width="10px">
-			  					<a href="{{ route('products.edit',$product->id)  }}" class="btn btn-secondary btn-sm">Editar</a>
-			  				</td>
-			  				<td >
-			  					{!! Form::open(['route' => ['products.destroy', $product->id],
-			  					'method'=> 'DELETE']) !!}
-			  					<button class="btn btn-sm btn-danger">Eliminar</button>
-			  					{!! Form::close() !!}
-			  				</td>			  						
+			  				<td>
+			  					<div class="btn-group btn-group-toggle" data-toggle="buttons">	  
+			  						@if(kvfj(auth()->user()->permissions, 'products_edit'))
+								    <a href="{{ route('products_edit',$product->id)  }}" class="btn btn-success btn-sm"><i class="far fa-edit"></i> Editar</a>			
+								    @endif		
+								    @if(kvfj(auth()->user()->permissions, 'products_destroy'))
+				  					{!! Form::open(['route' => ['products_destroy', $product->id],
+				  					'method'=> 'DELETE']) !!}
+				  					<button class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i> Eliminar</button>
+				  					{!! Form::close() !!}
+				  					@endif
+								</div>
+			  				</td>		  						
 			  			</tr>
 			  			@endforeach
 			  		</tbody>

@@ -7,7 +7,8 @@
     			<div class="card shadow bg-light">
     			  <div class="card-body">
     			  	<h4 class="text-center text-primary">Agregar categoria</h4>
-    			    {!! Form::open(['route' => 'category.add']) !!}
+    			  	@if(kvfj(auth()->user()->permissions, 'category_add'))
+    			    {!! Form::open(['route' => 'category_add']) !!}
 							<label for="name">Nombre:</label>
 							<div class="input-group">
 								<div class="input-group-prepend">
@@ -45,6 +46,7 @@
 							<button class="btn btn-primary btn-lg btn-block"><i class="far fa-save"></i> Guardar</button>
 							</div>    			    	
     			    {!! Form::close() !!}
+    			    @endif
     			  </div>
     			</div>
     		</div>
@@ -79,13 +81,17 @@
 										<td>{!! htmlspecialchars_decode($cat->icono) !!}</td>
 										<td>{{ $cat->name }}</td>
 										<td width="10px">
-											<a href="{{ route('category.edit', $cat->id) }}" class="btn btn-warning btn-sm">Editar</a>
+											@if(kvfj(auth()->user()->permissions, 'category_edit'))
+											<a href="{{ route('category_edit', $cat->id) }}" class="btn btn-warning btn-sm"> Editar</a>
+											@endif
 										</td>
 										<td >
-											 {!! Form::open(['route' => ['category.destroy', $cat->id],
+											@if(kvfj(auth()->user()->permissions, 'category_destroy'))
+											 {!! Form::open(['route' => ['category_destroy', $cat->id],
 		           							'method'=> 'DELETE']) !!}
-		           							<button class="btn btn-sm btn-danger">Eliminar</button>
+		           							<button class="btn btn-sm btn-danger"> Eliminar</button>
 		           							{!! Form::close() !!}
+		           							@endif
 										</td>
 									</tr>
 									@endforeach

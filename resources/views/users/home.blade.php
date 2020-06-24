@@ -29,7 +29,8 @@
 				      <th scope="col">Email</th>
 				      <th scope="col">Role</th>
 				      <th scope="col">Estado</th>
-				      <th scope="col">Acción</th>				
+				      <th scope="col">Acción</th>
+				      <th></th>				
 					</tr>
 					<tbody>
 						@foreach($users as $user)
@@ -40,7 +41,14 @@
 							<td>{{ getRoleUserArray(null, $user->role) }}</td>
 							<td>{{ getUserStatusArray(null, $user->status) }}</td>
 							<td>
-								<a href="{{ route('users.show', $user->id) }}" class="btn btn-success btn-sm">Ver</a>
+								@if(kvfj(auth()->user()->permissions, 'users_show'))
+								<a href="{{ route('users_show', $user->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> Ver</a>
+								@endif
+							</td>
+							<td>
+								@if(kvfj(auth()->user()->permissions, 'users_permissions'))
+								<a href="{{ route('users_permissions', $user->id) }}" class="btn btn-success btn-sm"><i class="fas fa-user-cog"></i> Permisos</a>
+								@endif
 							</td>
 						</tr>
 						@endforeach

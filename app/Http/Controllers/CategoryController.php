@@ -14,6 +14,7 @@ class CategoryController extends Controller
         $this->middleware('auth');
         $this->middleware('isadmin');     
         $this->middleware('user_status');
+        $this->middleware('user_permissions');
     }
     public function home($module)
     {
@@ -55,7 +56,7 @@ class CategoryController extends Controller
     	]);
     	$category->module = e($request->module);
     	$category->name = e($request->name);
-    	$category->icono = e($request->icono);
+    	$category->icono = $request->icono;
     	if($category->save())
     	{
     		return redirect('/categories/'.$category->module)->with('status', 'Categoria actualizada correctamente');

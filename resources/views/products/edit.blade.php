@@ -2,7 +2,8 @@
 @section('title', 'Editar Producto')
 @section('content')
 <div class="container">
-	{!! Form::model($product, ['route' => ['products.update', $product->id],'method' => 'PUT', 'files' => true]) !!}
+	@if(kvfj(auth()->user()->permissions, 'products_edit'))	
+	{!! Form::model($product, ['route' => ['products_edit', $product->id],'method' => 'PUT', 'files' => true]) !!}
 	<div class="card bg-light shadow rounded">
 		<h1 class="text-center text-secondary font-weight-bold mt-2">Editar producto</h1>
 		<div class="card-body">
@@ -92,10 +93,13 @@
 						{!! Form::textarea('content', $product->content, ['class' => 'form-control', 'id' => 'editor']) !!}
 					</div>
 			</div>
-			<button class="btn btn-primary btn-lg mt-2 float-right"><i class="far fa-save"></i> Editar</button>			
-			<a href="{{ route('products.home') }}" class="btn btn-outline-primary btn-lg mt-2 mr-2 float-right">Cancelar</a>
-		</div>	
-	{!! Form::close() !!}	
+			<button class="btn btn-primary btn-lg mt-2 float-right"><i class="far fa-save"></i> Editar</button>	
+			@if(kvfj(auth()->user()->permissions, 'products_home'))		
+			<a href="{{ route('products_home') }}" class="btn btn-outline-primary btn-lg mt-2 mr-2 float-right">Cancelar</a>
+			@endif
+		</div>		
 	</div>
+	{!! Form::close() !!}
+	@endif
 </div>
 @endsection

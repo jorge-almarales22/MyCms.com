@@ -16,6 +16,7 @@ class ProductsController extends Controller
         $this->middleware('auth');
         $this->middleware('isadmin');     
         $this->middleware('user_status');
+        $this->middleware('user_permissions');
     }
     public function getHome()
     {
@@ -68,7 +69,7 @@ class ProductsController extends Controller
                 $img->save($upload_path.'/'.$path.'/t_'.$filename);
             }
             Alert::success('Exito', 'Producto Guardado con exito');
-            return redirect()->route('products.home')->with('status', '¡ El producto fue guardado satisfatoriamente felicidades !');
+            return redirect()->route('products_home')->with('status', '¡ El producto fue guardado satisfatoriamente felicidades !');
         }
     }
     public function getEdit(Product $product)
@@ -117,14 +118,14 @@ class ProductsController extends Controller
                 unlink($upload_path.'/'.$ipp.'/t_'.$ip);
             }
             Alert::success('Exito', 'Producto modificado con exito');
-            return redirect()->route('products.home')->with('status', '¡ El producto fue modificado satisfatoriamente felicidades !');
+            return redirect()->route('products_home')->with('status', '¡ El producto fue modificado satisfatoriamente felicidades !');
         }
     }
     public function productDestroy(Product $product)
     {
         $product->delete();
         Alert::success('Exito', 'Producto Elimiando con exito');
-        return redirect()->route('products.home')->with('status', '¡ El producto fue eliminado satisfatoriamente pero puede recuperarlo en cualquier momento si lo desea !');
+        return redirect()->route('products_home')->with('status', '¡ El producto fue eliminado satisfatoriamente pero puede recuperarlo en cualquier momento si lo desea !');
     }
 
     public function getSearch(Request $request)

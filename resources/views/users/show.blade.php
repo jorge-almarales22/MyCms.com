@@ -27,9 +27,13 @@
 				    	<span class="text-primary"><i class="fas fa-user-tie"></i> Role de usuario:</span>
 				    	<span class="text-secondary mb-2">{{ getRoleUserArray(null, $user->role) }}</span><br>
 				    	@if($user->status == '100')
-				    	<a href="{{ route('users.banned', $user->id) }}" class="btn btn-success btn-block mt-2">Activar usuario</a>  
+				    	@if(kvfj(auth()->user()->permissions, 'users_banned'))
+				    	<a href="{{ route('users_banned', $user->id) }}" class="btn btn-success btn-block mt-2">Activar usuario</a>  
+				    	@endif
 				    	@else
-				    	<a href="{{ route('users.banned', $user->id) }}" class="btn btn-danger btn-block mt-2">Suspender usuario</a> 
+				    	@if(kvfj(auth()->user()->permissions, 'users_banned'))
+				    	<a href="{{ route('users_banned', $user->id) }}" class="btn btn-danger btn-block mt-2">Suspender usuario</a> 
+				    	@endif
 				    	@endif			     			    			    	
 				    </div>			  	
 			  </div>

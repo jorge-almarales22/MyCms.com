@@ -2,7 +2,8 @@
 @section('title', 'Agregar producto')
 @section('content')
 <div class="container">
-	{!! Form::open(['route' => 'products.store', 'files' => true]) !!}
+	@if(kvfj(auth()->user()->permissions, 'products_store'))		
+	{!! Form::open(['route' => 'products_store', 'files' => true]) !!}
 	<div class="card bg-light shadow rounded">
 		<h1 class="text-center text-secondary font-weight-bold mt-2">Agregar producto</h1>
 		<div class="card-body">
@@ -81,10 +82,13 @@
 						{!! Form::textarea('content', null, ['class' => 'form-control', 'id' => 'editor']) !!}
 					</div>
 			</div>
-			<button class="btn btn-primary btn-lg mt-2 float-right"><i class="far fa-save"></i> Guardar</button>			
-			<a href="{{ route('products.home') }}" class="btn btn-outline-primary btn-lg mt-2 mr-2 float-right">Cancelar</a>
+			<button class="btn btn-primary btn-lg mt-2 float-right"><i class="far fa-save"></i> Guardar</button>
+			@if(kvfj(auth()->user()->permissions, 'products_home'))			
+			<a href="{{ route('products_home') }}" class="btn btn-outline-primary btn-lg mt-2 mr-2 float-right">Cancelar</a>
+			@endif
 		</div>	
-	{!! Form::close() !!}	
 	</div>
+	{!! Form::close() !!}
+	@endif
 </div>
 @endsection
