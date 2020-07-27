@@ -75,13 +75,37 @@
 							{!! Form::number('discount', 0.00, ['class' => 'form-control', 'min' => '0.00', 'step' => 'any']) !!}
 						</div>
 					</div>
+					<div class="col-md-3">
+						<label for="inventory">Inventario:</label>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">
+									<i class="fas fa-dollar-sign"></i>
+								</span>
+							</div>
+							{!! Form::number('inventory', 0, ['class' => 'form-control', 'min' => '0.00']) !!}
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-3">
+						<label for="code">Codigo del producto:</label>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">
+									<i class="fas fa-dollar-sign"></i>
+								</span>
+							</div>
+							{!! Form::text('code', 0, ['class' => 'form-control']) !!}
+						</div>
+					</div>
 				</div>
 				<div class="row mt-2">
 					<div class="col-md-12">
 						<label for="content">Descripción</label>
 						{!! Form::textarea('content', null, ['class' => 'form-control', 'id' => 'editor']) !!}
 					</div>
-			</div>
+				</div>
 			<button class="btn btn-primary btn-lg mt-2 float-right"><i class="far fa-save"></i> Guardar</button>
 			@if(kvfj(auth()->user()->permissions, 'products_home'))			
 			<a href="{{ route('products_home') }}" class="btn btn-outline-primary btn-lg mt-2 mr-2 float-right">Cancelar</a>

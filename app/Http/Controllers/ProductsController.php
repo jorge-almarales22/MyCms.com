@@ -48,12 +48,14 @@ class ProductsController extends Controller
 
         $product = new Product;
         $product->status ='0';
+        $product->code = e($request->code);
         $product->name = e($request->name);
         $product->slug =  Str::slug($request->name);
         $product->category_id = e($request->category);
         $product->file_path = date('Y-m-d');
         $product->image = $filename;
         $product->price = e($request->price);
+        $product->inventory = e($request->inventory);
         $product->in_discount = e($request->indiscount);
         $product->discount = e($request->discount);
         $product->content = e($request->content);
@@ -88,6 +90,7 @@ class ProductsController extends Controller
         $ipp = $product->file_path;
         $ip = $product->image;
         $product->status = e($request->status);
+        $product->code = e($request->code);
         $product->name = e($request->name);
         $product->category_id = e($request->category);
         if($request->hasFile('img')){
@@ -102,6 +105,7 @@ class ProductsController extends Controller
         }
 
         $product->price = e($request->price);
+        $product->inventory = e($request->inventory);
         $product->in_discount = e($request->indiscount);
         $product->discount = e($request->discount);
         $product->content = e($request->content);

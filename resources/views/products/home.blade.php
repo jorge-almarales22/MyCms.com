@@ -41,31 +41,27 @@
 						@endif
 					</div>							  	
 			  	</div>
-			  	
 			  	<table class="table table-hover">
 			  		<thead class="thead-dark">
 			  			<tr>
 			  				<th scope="col">ID</th>
-			  				<th scope="col">Estado</th>
 			  				<th scope="col">Imagen</th>
 			  				<th scope="col">Nombre</th>
 			  				<th scope="col">Categoria</th>
 			  				<th scope="col">Precio</th>
 			  				<th scope="col">Acciones</th>
-			  				<th scope="col"></th>
 			  			</tr>
 			  		</thead>
 			  		<tbody>
 			  			@foreach($products as $product)
 			  			<tr>
 			  				<td width="50">{{ $product->id }}</td>
-			  				<td >@if($product->status == '0') No publico @else publico @endif </td>
 			  				<td width="64">
 			  					<a href="{{ url('/uploads/'.$product->file_path.'/'.$product->image) }}" >
 			  						<img src="{{ url('/uploads/'.$product->file_path.'/t_'.$product->image) }}" width="64">
 			  					</a>
 			  				</td>
-			  				<td>{{ $product->name }}</td>
+			  				<td>{{ $product->name }} @if($product->status == '0') <i class="fas fa-eraser" data-toggle="tooltip" data-placement="top" title="Estado borrador"></i> @else publico @endif  </td>
 			  				<td>{{ $product->category->name }}</td>
 			  				<td>{{ $product->price }}</td>
 			  				<td>

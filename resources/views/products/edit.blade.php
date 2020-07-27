@@ -87,6 +87,30 @@
 						</div>						
 					</div>						
 				</div>
+				<div class="row">
+					<div class="col-md-3">
+						<label for="inventory">Inventario:</label>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">
+									<i class="fas fa-dollar-sign"></i>
+								</span>
+							</div>
+							{!! Form::number('inventory', $product->inventory, ['class' => 'form-control', 'min' => '0.00']) !!}
+						</div>
+					</div>
+					<div class="col-md-3">
+						<label for="code">Codigo del producto:</label>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">
+									<i class="fas fa-dollar-sign"></i>
+								</span>
+							</div>
+							{!! Form::text('code', $product->code, ['class' => 'form-control']) !!}
+						</div>
+					</div>
+				</div>
 				<div class="row mt-2">
 					<div class="col-md-12">
 						<label for="content">Descripción</label>
