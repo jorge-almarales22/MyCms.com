@@ -10996,3 +10996,7 @@ a.text-dark:focus {
   height: 100vh;
 }
 
+.card {
+  border-bottom: 2px solid #3490dc;
+}
+

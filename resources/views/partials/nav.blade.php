@@ -54,6 +54,11 @@
 							<a class="nav-link {{ request()->routeIs('categories_home') ? 'active' : '' }} {{ request()->routeIs('category_edit') ? 'active' : '' }} " href="{{ url('/categories/0') }}"><i class="fas fa-list-ol"></i> Categorias</a>
 						</li>
 					@endif
+					@if(kvfj(auth()->user()->permissions, 'estadisticas'))
+						<li class="nav-item">
+							<a class="nav-link {{ request()->routeIs('estadisticas') ? 'active' : '' }} {{ request()->routeIs('estadisticas') ? 'active' : '' }} " href="{{ route('estadisticas') }}"><i class="fas fa-sort-amount-down"></i> Estadisticas</a>
+						</li>
+					@endif
 				@endif							
 				@endauth
 				@guest				

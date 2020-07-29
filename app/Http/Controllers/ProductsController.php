@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Category;
+use App\User;
 use Config, Image;
 use Illuminate\Support\Str;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -23,6 +24,12 @@ class ProductsController extends Controller
     	// $products = Product::orderBy('id', 'Desc')->get();
         $products = Product::with(['category'])->orderBy('id','Desc')->paginate(4);
     	return view('products.home', compact('products'));
+    }
+    public function getEstadistica()
+    {
+        $users = User::count();
+        $products = Product::count();
+        return view('products.estadisticas', compact('users', 'products'));
     }
     public function getCreate()
     {

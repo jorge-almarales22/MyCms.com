@@ -8,6 +8,12 @@ var base = location.protocol+'//'+location.host;
 // });
 $(document).ready(function(){
 	editor_init('editor');
+	btn_deleted = document.getElementsByClassName("btn-deleted");
+	// console.log(btn_deleted.length);
+	for(i=0; i < btn_deleted.length; i++)
+	{
+		btn_deleted[i].addEventListener('click', delete_object);
+	}
 });
 function editor_init(field){
 	CKEDITOR.replace(field,{
@@ -17,4 +23,25 @@ function editor_init(field){
 		{ name: 'document', items: ['CodeSnippet', 'EmojiPanel', 'Preview', 'Source']  }
 		]
 	});
+}
+function delete_object(e)
+{
+	e.preventDefault();
+	var object = this.getAttribute('data-object');
+	var url = base + '/products' + '/' + object;
+	  Swal.fire({
+		title: '¿Estas seguro que quieres eliminar este item?',
+		text: "Recuerda que los items eliminados quedaran en la papelera de reciclaje",
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'Si, si quiero!',
+		cancelButtonText: 'Cancelar'
+	  }).then((result) => {
+		if (result.value) {
+			window.location.href = url;
+		}
+	  })
+	
 }

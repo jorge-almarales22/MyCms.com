@@ -29,6 +29,33 @@ class UserController extends Controller
     {
     	return view('users.show', compact('user'));
     }
+
+    public function postUserEdit(Request $request, User $user)
+    {
+        $user->role = $request->type_user;
+        if($request->type_user == '1')
+        {
+            if(is_null($user->permissions))
+            {
+                $permissions = ['home' => true, 'users_permissions' => true, 'users_home' => true];
+                $permissions = json_encode($permissions);
+                $user->permissions = $permissions;
+            }
+        }else
+        {
+                $permissions = ['home' => true, 'products_home' => true, 'products_search' => true,
+                'categories_home' => true, 'users_home'=>true];
+                $permissions = json_encode($permissions);
+                $user->permissions = $permissions;
+        }
+        if($user->save() && $user->role == '1')
+        {
+            return redirect('/users/permissions/'. $user->id)->with('status', '¡ El usuario es administrador ahora felicidades !');
+        }else{
+            return back()->with('status', '¡ El usuario es un usuario normal ahora felicidades !');
+        }
+    }
+
     public function getBanned(User $user)
     {
     	if($user->status == '100')
@@ -67,6 +94,9 @@ class UserController extends Controller
             'users_show' => $request->users_show,
             'users_permissions' => $request->users_permissions,
             'users_banned' => $request->users_banned,
+            'users_edit' => $request->users_edit,
+            'estadisticas' => $request->estadisticas,
+            'estadisticas_admin' => $request->estadisticas_admin,
         ];
         $permissions = json_encode($permissions);
         $user->permissions = $permissions;

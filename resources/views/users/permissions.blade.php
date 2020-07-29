@@ -58,7 +58,13 @@
 			    <hr>
 			    <div class="container">
 			    	<label><input type="checkbox" name="home" value="true" @if(kvfj($user->permissions, 'home')) checked @endif> Puede ver el home.</label>
-			    </div>			  
+				</div>	
+				<div class="container">
+			    	<label><input type="checkbox" name="estadisticas" value="true" @if(kvfj($user->permissions, 'estadisticas')) checked @endif> Puede ver las estadisticas.</label>
+				</div>		  
+				<div class="container">
+			    	<label><input type="checkbox" name="estadisticas_admin" value="true" @if(kvfj($user->permissions, 'estadisticas_admin')) checked @endif> Puede ver las estadisticas de admin.</label>
+			    </div>	
 			  </div>
 			</div>
 		</div>			
@@ -71,6 +77,9 @@
 			    <hr>
 			    <div class="container">
 			    	<label><input type="checkbox" name="users_home" value="true" @if(kvfj($user->permissions, 'users_home')) checked @endif> Puede ver modulo usuarios.</label>
+				</div>
+				<div class="container">
+			    	<label><input type="checkbox" name="users_edit" value="true" @if(kvfj($user->permissions, 'users_edit')) checked @endif> Puede editar usuarios.</label>
 			    </div>	
 			    <div class="container">
 			    	<label><input type="checkbox" name="users_show" value="true" @if(kvfj($user->permissions, 'users_show')) checked @endif> Puede ver usuarios.</label>

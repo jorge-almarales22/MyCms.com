@@ -8,9 +8,9 @@
 	{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
 	<script src="{{asset('js/jquery-3.5.1.min.js')}}"></script>
 	<script src="https://kit.fontawesome.com/e4ff20d8c9.js" crossorigin="anonymous"></script>
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="{{ url('/static/libs/ckeditor/ckeditor.js') }}"></script>
 	<script src="{{ url('/static/js/admin.js?v='.time()) }}"></script>	
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 <body>
 	<div class="d-flex flex-column h-screen justify-content-between">

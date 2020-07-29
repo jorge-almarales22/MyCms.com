@@ -39,6 +39,35 @@
 			  </div>
 			</div>
 		</div>
+		<div class="col-md-8">
+			@if(kvfj(auth()->user()->permissions, 'users_edit'))
+			{!! Form::open(['route' => ['users_edit', $user->id]]) !!}
+					<div class="card shadow bg-light rounded">
+						<div class="card-body">
+							<h2 class=" text-center text-secondary">Editar usuario</h2>
+							<div class="row">
+								<div class="col-md-6">
+									<label for="type_user">Tipo de usuario:</label>
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text" id="basic-addon1">
+												<i class="fas fa-dollar-sign"></i>
+											</span>
+										</div>
+										{!! Form::select('type_user',  getRoleUserArray('list',null), $user->role, ['class' => 'custom-select']) !!}
+									</div>
+								</div>
+							</div>
+							<div class="row mt-2">
+								<div class="col-md-12">
+									<button class="btn btn-success btn-lg"> <i class="far fa-save"></i> Guardar</button>
+								</div>
+							</div>
+						</div>
+					</div>
+			{!! Form::close() !!}
+			@endif
+		</div>
 	</div>
 </div>
 @endsection

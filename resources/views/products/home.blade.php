@@ -68,12 +68,18 @@
 			  					<div class="btn-group btn-group-toggle" data-toggle="buttons">	  
 			  						@if(kvfj(auth()->user()->permissions, 'products_edit'))
 								    <a href="{{ route('products_edit',$product->id)  }}" class="btn btn-success btn-sm"><i class="far fa-edit"></i> Editar</a>			
-								    @endif		
-								    @if(kvfj(auth()->user()->permissions, 'products_destroy'))
+									@endif	
+										
+								    {{-- @if(kvfj(auth()->user()->permissions, 'products_destroy'))
 				  					{!! Form::open(['route' => ['products_destroy', $product->id],
 				  					'method'=> 'DELETE']) !!}
 				  					<button class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i> Eliminar</button>
 				  					{!! Form::close() !!}
+									@endif --}}
+
+									@if(kvfj(auth()->user()->permissions, 'products_destroy'))
+										<a href="{{ route('products_destroy', $product->id) }}" 
+										class="btn btn-sm btn-danger btn-deleted" data-object="{{ $product->id}}" data-path="products_destroy"><i class="far fa-trash-alt"></i> Eliminar</a>
 				  					@endif
 								</div>
 			  				</td>		  						
